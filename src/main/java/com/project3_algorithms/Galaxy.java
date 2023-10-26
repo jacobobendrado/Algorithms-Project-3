@@ -21,7 +21,7 @@ public class Galaxy {
         for (int i = 0; i < k; i++) {
             for (int j = 0; j < m; j++) {
                 for (int l = 0; l < n; l++) {
-                    galaxy[i][j][l] = new Dominion();
+                    galaxy[i][j][l] = new Dominion(i, j, l);
                 }
             }
         }
@@ -32,9 +32,12 @@ public class Galaxy {
     //intialze a dominion
     public Dominion MakeSet(int currentDominion){
         int cd = currentDominion;
-        int kk = cd/k;
-        int mm = 
-        int nn = 
+        int kk = cd/(m*n);
+        cd = cd - (kk*m*n);
+        int mm = cd/n;
+        int nn = cd%n;
+        
+        Dominion newDominion = new Dominion ();
     }
             
     //give a dominion whos is daddy
