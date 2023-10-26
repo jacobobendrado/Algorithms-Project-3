@@ -26,11 +26,21 @@ public class Galaxy {
             }
         }
     }
-    
+    //merge two sets together
     //public Dominion Union ()
     
-    //public Dominion MakeSet()
+    //intialze a dominion
+    public Dominion MakeSet(int currentDominion){
+        int cd = currentDominion;
+        int kk = cd/k;
+        int mm = 
+        int nn = 
+    }
             
+    //give a dominion whos is daddy
     //public Dominion FindSet()
     
+    private void findNeighbors(){
+        
+    }
 }

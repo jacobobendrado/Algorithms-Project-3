@@ -52,6 +52,13 @@ public class Project3_Algorithms {
             }
             Calendar.push(dominionList);
         }
-        int i = 0;
+        
+        for (int i = 0; i < Calendar.size(); i++){
+            int[] dominionList = Calendar.pop();
+            for (int j = 0; j < dominionList.length; j++){
+                myGalaxy.MakeSet(dominionList[j]);
+
+            }
+        }
     }
 }
