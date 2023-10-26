@@ -10,21 +10,27 @@ package com.project3_algorithms;
  */
 public class Galaxy {
     private int n, m, k;
-    private Location[][][] galaxy;
+    private Dominion[][][] galaxy;
     
     public Galaxy(int nn, int mm, int kk) {
         n = nn;
         m = mm;
         k = kk;
         
-        galaxy = new Location[k][m][n];
+        galaxy = new Dominion[k][m][n];
         for (int i = 0; i < k; i++) {
             for (int j = 0; j < m; j++) {
                 for (int l = 0; l < n; l++) {
-                    galaxy[i][j][l] = new Location();
+                    galaxy[i][j][l] = new Dominion();
                 }
             }
         }
     }
+    
+    //public Dominion Union ()
+    
+    //public Dominion MakeSet()
+            
+    //public Dominion FindSet()
     
 }
