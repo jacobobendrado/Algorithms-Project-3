@@ -7,6 +7,6 @@ package com.project3_algorithms;
 public class Project3_Algorithms {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Galaxy myGalaxy = new Galaxy(3,3,3);
     }
 }
