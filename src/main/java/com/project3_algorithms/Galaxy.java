@@ -9,13 +9,15 @@ package com.project3_algorithms;
  * @author jacob
  */
 public class Galaxy {
-    private int n, m, k;
+    private int k, m, n;
     private Dominion[][][] galaxy;
+    private int countOfSets;
     
-    public Galaxy(int nn, int mm, int kk) {
+    public Galaxy(int kk, int mm, int nn) {
         n = nn;
         m = mm;
         k = kk;
+        countOfSets = 0;
         
         galaxy = new Dominion[k][m][n];
         for (int i = 0; i < k; i++) {
@@ -26,24 +28,43 @@ public class Galaxy {
             }
         }
     }
+    
+    public void addDominion(int dominionID) {
+        Dominion currDominion = makeSet(dominionID);
+        while (findNeighbors(currDominion) != null) {
+            union(findNeighbors(currDominion), currDominion);
+        }
+        
+    }
+        
     //merge two sets together
-    //public Dominion Union ()
+    public Dominion union (Dominion first, Dominion second) {
+        
+        
+        countOfSets--;
+    }
     
     //intialze a dominion
-    public Dominion MakeSet(int currentDominion){
+    public Dominion makeSet(int dominionID){
         int cd = currentDominion;
         int kk = cd/(m*n);
         cd = cd - (kk*m*n);
         int mm = cd/n;
         int nn = cd%n;
         
-        Dominion newDominion = new Dominion ();
+        Dominion currDominion = galaxy[kk][mm][nn];
+        currDominion.setRepresentative(currDominion);
+        currDominion.setRank(1);
+        
+        countOfSets++;
+        
+        return currDominion;
     }
             
     //give a dominion whos is daddy
     //public Dominion FindSet()
     
-    private void findNeighbors(){
+    private Dominion findNeighbors(Dominion currDominion){
         
     }
 }

@@ -6,26 +6,27 @@ package com.project3_algorithms;
  */
 public class Dominion {
     
-    private int n, m, k;
-    private Dominion representative;
+    private int k, m, n;
     private Dominion parent;
     private int rank;
     
-    public Dominion(int nn, int mm, int kk) {
+    public Dominion(int kk, int mm, int nn) {
         n = nn;
         m = mm;
         k = kk;
         parent = null;
-        representative = null;
         rank = 0;
     }
     
     public int[] getPosition() {
-        return new int[] {n, m, k};
+        return new int[] {k, m, n};
     }
     
     public Dominion getRepresentative() {
-        return compressPath();
+        if (parent != null && parent != this) {
+            parent = parent.getRepresentative();
+        }
+        return parent;
     }
     
     public int getRank() {
@@ -33,20 +34,12 @@ public class Dominion {
     }
     
     public void setRepresentative(Dominion newRep) {
-        compressPath().parent = newRep;
+        getRepresentative().parent = newRep;
     }
     
     public void setRank(int newRank) {
         rank = newRank;
     }
     
-    
-    private Dominion compressPath() {
-        if (parent != null && parent != this) {
-            parent = parent.compressPath();
-            representative = parent;
-        }
-        return parent;
-    }
 }
 
