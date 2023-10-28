@@ -29,24 +29,37 @@ public class Galaxy {
         }
     }
     
+    public int getCountOfSets(){
+        return countOfSets;
+    }
+    
     public void addDominion(int dominionID) {
         Dominion currDominion = makeSet(dominionID);
         while (findNeighbors(currDominion) != null) {
             union(findNeighbors(currDominion), currDominion);
         }
-        
     }
         
     //merge two sets together
-    public Dominion union (Dominion first, Dominion second) {
+    public void union (Dominion first, Dominion second) {
+        //getreps of both
+        Dominion firstRep = first.getRepresentative();
+        Dominion secondRep = second.getRepresentative();
         
-        
+        if (firstRep.getRank() > secondRep.getRank()) {
+            secondRep.setRepresentative(firstRep);
+        } else if (firstRep.getRank() < secondRep.getRank()){
+            firstRep.setRepresentative(secondRep);
+        } else {
+            secondRep.setRepresentative(firstRep);
+            firstRep.setRank(firstRep.getRank()+1);
+        }
         countOfSets--;
     }
     
     //intialze a dominion
     public Dominion makeSet(int dominionID){
-        int cd = currentDominion;
+        int cd = dominionID;
         int kk = cd/(m*n);
         cd = cd - (kk*m*n);
         int mm = cd/n;
@@ -65,6 +78,44 @@ public class Galaxy {
     //public Dominion FindSet()
     
     private Dominion findNeighbors(Dominion currDominion){
+        int kk = currDominion.getK();
+        int mm = currDominion.getM();
+        int nn = currDominion.getN();
         
+        Dominion currRep = currDominion.getRepresentative();
+            
+        if (validOption(kk+1, mm, nn, currRep)){
+            return galaxy[kk+1][mm][nn];
+        }
+        if (validOption(kk-1, mm, nn, currRep)){
+            return galaxy[kk-1][mm][nn];
+        }
+        if (validOption(kk, mm+1, nn, currRep)){
+            return galaxy[kk][mm+1][nn];
+        }
+        if (validOption(kk, mm-1, nn, currRep)){
+            return galaxy[kk][mm-1][nn];
+        }
+        if (validOption(kk, mm, nn+1, currRep)){
+            return galaxy[kk][mm][nn+1];
+        }
+        if (validOption(kk, mm, nn-1, currRep)){
+            return galaxy[kk][mm][nn-1];
+        }
+        return null;
     }
+    
+    private boolean validOption(int kk, int mm, int nn, Dominion currRep){
+        if (kk < 0 || mm < 0 || nn < 0 || kk >= k || mm >= m || nn >= n){
+            return false;
+        }
+        if (galaxy[kk][mm][nn].getRepresentative() == null){
+            return false;
+        }
+        if (galaxy[kk][mm][nn].getRepresentative() == currRep){
+            return false;
+        }
+        return true;
+    }
+    
 }

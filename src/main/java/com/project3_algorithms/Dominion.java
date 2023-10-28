@@ -18,8 +18,16 @@ public class Dominion {
         rank = 0;
     }
     
-    public int[] getPosition() {
-        return new int[] {k, m, n};
+    public int getK() {
+        return k;
+    }
+    
+    public int getM() {
+        return m;
+    }
+    
+    public int getN() {
+        return n;
     }
     
     public Dominion getRepresentative() {
@@ -34,7 +42,7 @@ public class Dominion {
     }
     
     public void setRepresentative(Dominion newRep) {
-        getRepresentative().parent = newRep;
+        parent = newRep;
     }
     
     public void setRank(int newRank) {

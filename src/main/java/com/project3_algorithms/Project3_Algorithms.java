@@ -33,10 +33,10 @@ public class Project3_Algorithms {
         //get dimensions of galaxy
         int n = inputScanner.nextInt();
         int m = inputScanner.nextInt();
-        int l = inputScanner.nextInt();
+        int k = inputScanner.nextInt();
 
         //create galaxy with given dimensions
-        Galaxy myGalaxy = new Galaxy(n,m,l);
+        Galaxy myGalaxy = new Galaxy(k,m,n);
         
         //recieve number of dominions
         int numMonths = inputScanner.nextInt();
@@ -60,8 +60,14 @@ public class Project3_Algorithms {
                 myGalaxy.addDominion(dominionList[j]);
 
             }
+            if (myGalaxy.getCountOfSets()!=1){
+                countOfDisconnectedMonths++;
+            }
         }
         
         //Print results
+        System.out.println(countOfDisconnectedMonths);
+        
+        
     }
 }
