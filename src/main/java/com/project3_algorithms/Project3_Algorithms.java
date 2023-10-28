@@ -2,9 +2,8 @@ package com.project3_algorithms;
 import java.util.Scanner;
 import java.util.Stack;
 
-//
 /**
- * MainClass for Project 3
+ * Main Class for Project 3
  *
  * @author Jacob Bender and Christian Eppich
  * @version 1.0
@@ -12,38 +11,31 @@ import java.util.Stack;
  * Summary of Modifications:
  *
  * Description: Main class where testing for project3 is outlined and executed.
- * 
- * 
-2 2 3 9 
-2 4 5 
-3 6 8 10 
-1 7 
-1 2 
-1 11 
-1 9 
-1 1 
-1 0
- 1 3
+ *  Main takes in dimensions for the galaxy, how many months pass, and what 
+ *  dominions secede from the galaxy in a given month. It then reverses the list
+ *  of months using a stack and calls on functionalities of the Galaxy class to 
+ *  add dominions. It prints how many months the galaxy was disconnected. 
  */
 public class Project3_Algorithms {
 
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
         
-        //get dimensions of galaxy
+        //Get dimensions of galaxy
         int n = inputScanner.nextInt();
         int m = inputScanner.nextInt();
         int k = inputScanner.nextInt();
 
-        //create galaxy with given dimensions
+        //Create galaxy with given dimensions
         Galaxy myGalaxy = new Galaxy(k,m,n);
         
-        //recieve number of dominions
+        //Receive number of months
         int numMonths = inputScanner.nextInt();
         
-        //add dominions to stack
+        //Use stack to reverse order of months
         Stack<int[]> Calendar = new Stack<>();  
         
+        //Input the months into the stack
         for (int i = 0; i < numMonths; i++){
             int numDoms = inputScanner.nextInt();
             int[] dominionList = new int [numDoms];
@@ -54,20 +46,22 @@ public class Project3_Algorithms {
         }
         
         int countOfDisconnectedMonths = 0;
+        
         for (int i = 0; i < numMonths; i++){
+            //For each month, add every dominion to the galaxy
             int[] dominionList = Calendar.pop();
             for (int j = 0; j < dominionList.length; j++){
+                //Call Galaxy function to add, check for neighbors, and maybe union
                 myGalaxy.addDominion(dominionList[j]);
-
             }
-            if (myGalaxy.getCountOfSets()!=1){
+            
+            //Check if the galaxy is disconnected
+            if (myGalaxy.getCountOfSets() > 1){
                 countOfDisconnectedMonths++;
             }
         }
         
         //Print results
         System.out.println(countOfDisconnectedMonths);
-        
-        
     }
 }
